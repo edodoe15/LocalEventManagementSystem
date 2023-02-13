@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://www.springframework.org/schema/context  
+        http://www.springframework.org/schema/context/spring-context.xsd  
+        http://www.springframework.org/schema/mvc  
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:component-scan base-package="com.ptf.wp.portfolio"/>
+
+    <mvc:annotation-driven/>
+    <mvc:default-servlet-handler/>
+    <mvc:resources mapping="/css/**" location="/resources/css/"/>
+    <mvc:resources mapping="/js/**" location="/resources/js/"/>
+    <mvc:resources mapping="/assets/**" location="/resources/assets/"/>
+    <mvc:resources mapping="/plugins/**" location="/resources/plugins/"/>
+
+    <bean
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property value="/WEB-INF/views/" name="prefix"/>
+        <property value=".jsp" name="suffix"/>
+    </bean>
+
+    <bean id="bazaPodataka" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+        <property name="url" value="jdbc:mysql://localhost:3306/projekat"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="edodoe2"></property>
+    </bean>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="bazaPodataka"></property>
+    </bean>
+
+    <bean id="lokacijaDao" class="com.ptf.wp.portfolio.database.LokacijaDao">
+        <property name="template" ref="jdbcTemplate"></property>
+    </bean>
+
+    <bean id="kategorijaDao" class="com.ptf.wp.portfolio.database.KategorijaDao">
+        <property name="template" ref="jdbcTemplate"></property>
+    </bean>
+
+    <bean id="dogadajDao" class="com.ptf.wp.portfolio.database.DogadajDao">
+        <property name="template" ref="jdbcTemplate"></property>
+    </bean>
+
+    <bean id="userDao" class="com.ptf.wp.portfolio.database.UserDao">
+        <property name="template" ref="jdbcTemplate"></property>
+    </bean>
+
+    <bean id="eventUserDetailsServis" class="com.ptf.wp.portfolio.servisi.EventUserDetailServis">
+        <constructor-arg index="0" ref="userDao"/>
+    </bean>
+
+    <bean id="lokacijaServis" class="com.ptf.wp.portfolio.servisi.LokacijaServis"></bean>
+
+    <bean id="kategorijaServis" class="com.ptf.wp.portfolio.servisi.KategorijaServis"></bean>
+
+    <bean id="dogadajServis" class="com.ptf.wp.portfolio.servisi.DogadajServis"></bean>
+
+    <bean id="korisnikDao" class="com.ptf.wp.portfolio.database.KorisnikDao">
+        <property name="template" ref="jdbcTemplate"></property>
+    </bean>
+
+    <bean id="vjestinaDao" class="com.ptf.wp.portfolio.database.VjestinaDao">
+        <property name="template" ref="jdbcTemplate"></property>
+    </bean>
+
+    <bean id="iskustvoDao" class="com.ptf.wp.portfolio.database.IskustvoDao">
+        <property name="template" ref="jdbcTemplate"></property>
+    </bean>
+
+    <bean id="obrazovanjeDao" class="com.ptf.wp.portfolio.database.ObrazovanjeDao">
+        <property name="template" ref="jdbcTemplate"></property>
+    </bean>
+
+    <bean id="uslugaDao" class="com.ptf.wp.portfolio.database.UslugaDao">
+        <property name="template" ref="jdbcTemplate"></property>
+    </bean>
+
+    <bean id="projekatDao" class="com.ptf.wp.portfolio.database.ProjekatDao">
+        <property name="template" ref="jdbcTemplate"></property>
+    </bean>
+
+    <bean id="svjedocanstvoDao" class="com.ptf.wp.portfolio.database.SvjedocanstvoDao">
+        <property name="template" ref="jdbcTemplate"></property>
+    </bean>
+
+    <bean id="kontaktDao" class="com.ptf.wp.portfolio.database.KontaktDao">
+        <property name="template" ref="jdbcTemplate"></property>
+    </bean>
+
+    <bean id="porfolioServis" class="com.ptf.wp.portfolio.servisi.PortfolioServis"></bean>
+
+    <bean id="kontaktServis" class="com.ptf.wp.portfolio.servisi.KontaktServis"></bean>
+
+</beans>  
