@@ -1,6 +1,15 @@
-# LocalEventManagementSystem
+# Local Event Management System
 
-The web application was made using Java (Spring MVC). Two types of users are present - admin and visitor. 
-Admin adds new locations, categories, events and manages visitors in such a way that they can deny their access. 
-Each new user can register during the first visit to the application. 
-The user can browse the available categories, locations and events in the local area.
+A web-based platform for managing local community events.
+
+## Technologies
+- Java, Spring Boot, Spring MVC
+- MySQL
+- HTML, CSS, JavaScript
+
+## Features
+- User registration and login
+- Event creation and management
+- Admin approval workflow
+- RSVP functionality
+
